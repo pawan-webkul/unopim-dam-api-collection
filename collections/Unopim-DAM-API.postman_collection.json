@@ -348,6 +348,47 @@
               "createdAt": "2026-01-16T12:16:04.000Z",
               "updatedAt": "2026-01-16T12:16:04.000Z",
               "uid": "4385199-c4cc4151-fbf4-4164-87d1-dfbca473bd17"
+            },
+            {
+              "name": "Get Asset Embedded Metadata",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/18/metadata",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "18",
+                    "metadata"
+                  ]
+                },
+                "description": "Return the embedded metadata (EXIF/IPTC/etc.) extracted at upload for the asset. For images with none stored, falls back to an on-demand read. Directory-ACL scoped."
+              },
+              "response": [],
+              "id": "cd575059-2350-4197-b822-6be63f9b5d96",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "c7f514e5-7106-4d04-970d-bcecb572afaa"
             }
           ],
           "id": "09e12423-176d-4eed-a87b-9cbf27d9663a",
@@ -1071,6 +1112,145 @@
               "createdAt": "2026-01-16T12:16:04.000Z",
               "updatedAt": "2026-01-16T12:16:04.000Z",
               "uid": "4385199-c47ff129-e3da-4fb2-9eda-fd5285e9a8b8"
+            },
+            {
+              "name": "Get All Tags",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags?per_page=25",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "",
+                      "disabled": true
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "25"
+                    }
+                  ]
+                },
+                "description": "List every tag in the vocabulary. Optional ?query= to search by name, ?per_page= (1-100) to page."
+              },
+              "response": [],
+              "id": "c092189c-40c3-4d9b-88dd-0b12c13dad10",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "b427d0b5-4a66-4c6d-b40a-0a95f25608c5"
+            },
+            {
+              "name": "Bulk Assign Tags",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"asset_ids\": [\n        1,\n        2,\n        3\n    ],\n    \"tags\": [\n        \"campaign\",\n        \"q3\"\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags/bulk",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags",
+                    "bulk"
+                  ]
+                },
+                "description": "Assign one or more tags to many assets at once. Tags are created on demand. Non-existent or inaccessible asset ids are skipped (not rejected); the response \"count\" reflects how many were tagged. Max 500 asset_ids."
+              },
+              "response": [],
+              "id": "401883f3-86dd-4c24-b2c4-537d4d782d48",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "c60e4d3e-efa2-44f2-9d22-49deefa106da"
+            },
+            {
+              "name": "Delete Tag (Vocabulary)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags/8",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags",
+                    "8"
+                  ]
+                },
+                "description": "Delete a tag from the vocabulary entirely \u2014 it is detached from every asset (pivot cascades). Gated by the api.dam.tags.destroy permission."
+              },
+              "response": [],
+              "id": "88f53432-66cf-46a6-bba1-8b6f9566d64f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "0d282de5-9b09-4345-8c5f-8a132a1f814f"
             }
           ],
           "id": "cfee14cc-4e58-4c1f-8739-7410a3bca506",
@@ -1127,6 +1307,361 @@
           "createdAt": "2026-01-16T12:16:04.000Z",
           "updatedAt": "2026-01-16T12:16:04.000Z",
           "uid": "4385199-5aa97080-03fa-4845-ad02-daf663bf076f"
+        },
+        {
+          "name": "Share",
+          "item": [
+            {
+              "name": "Get Share By Id",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares/1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares",
+                    "1"
+                  ]
+                }
+              },
+              "response": [],
+              "id": "c3959f4a-3cbf-49ce-a59a-e89f3fdd5df7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "e0ff56be-1033-4ecd-82f7-b1e9cbfec2c5"
+            },
+            {
+              "name": "Get all Shares",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares"
+                  ]
+                },
+                "description": "List every share link you can see. Directory-ACL scoped: you only see shares whose target lives in a directory granted to your role. Supports datagrid-style filters/sort/pagination."
+              },
+              "response": [],
+              "id": "b7dfd7ce-c662-44a8-96a8-5fc220ea87a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "a47a15d3-7563-4e89-8e24-84d7b75d5d6f"
+            },
+            {
+              "name": "Create Share (Asset)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"share_type\": \"asset\",\n    \"asset_id\": 20,\n    \"name\": \"SK\",\n    \"no_expiry\": false,\n    \"expiry_days\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares"
+                  ]
+                },
+                "description": "Create a share link for an asset. Pass asset_id. expiry_days (1-365, default 7) OR no_expiry:true for a permanent link. name is optional."
+              },
+              "response": [],
+              "id": "49c6abc7-fe10-4ca6-90a3-b1f0e6eef7a1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "1fc7daad-748e-40bf-8cf1-275fde2a7d97"
+            },
+            {
+              "name": "Create Share (Directory)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"share_type\": \"directory\",\n    \"directory_id\": 1,\n    \"name\": \"Brand assets\",\n    \"no_expiry\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares"
+                  ]
+                },
+                "description": "Create a share link for a directory (shares all assets inside it). Pass directory_id. Use no_expiry:true for a permanent link."
+              },
+              "response": [],
+              "id": "4b26d30a-1c98-4ea8-9460-d014fbf54d0f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "8c4be006-fdff-4954-898a-fe0ac72e3f76"
+            },
+            {
+              "name": "Update Share",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"SK55\",\n    \"expiry_days\": 30\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares/7",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares",
+                    "7"
+                  ]
+                },
+                "description": "Update a share's name and/or expiry. Only the fields you send change: pass name to rename, expiry_days to reset the window, or no_expiry:true to make it permanent."
+              },
+              "response": [],
+              "id": "6e6f8f42-05c1-4c26-bdbd-2f72f084e09d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "55a2534a-8c2a-404c-a30c-4ccfbfdffbce"
+            },
+            {
+              "name": "Revoke Share",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares/7/revoke",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares",
+                    "7",
+                    "revoke"
+                  ]
+                },
+                "description": "Revoke a share link (soft). The token/URL stops working but the record is kept so it can be reauthorized."
+              },
+              "response": [],
+              "id": "faf62ade-e78b-4fd0-b5d2-52c54fd36944",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "3b483653-a8da-4c42-a45f-56c553158ea8"
+            },
+            {
+              "name": "Reauthorize Share",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares/7/reauthorize",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares",
+                    "7",
+                    "reauthorize"
+                  ]
+                },
+                "description": "Reactivate a previously revoked link \u2014 the original token/URL works again (no new link is minted)."
+              },
+              "response": [],
+              "id": "bff0f9f6-0eb2-4f8d-8f6b-e336c2bc1c34",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "c06035d9-14f6-44f4-a57a-8df91a34e5e9"
+            },
+            {
+              "name": "Delete Share",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/shares/7",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "shares",
+                    "7"
+                  ]
+                },
+                "description": "Permanently delete the share record."
+              },
+              "response": [],
+              "id": "ec9158f3-1732-45f4-9f19-3aad412de7d4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "be3ab76c-8a91-4332-809e-9d57c365e992"
+            }
+          ],
+          "id": "50f5b06b-7650-4a5e-a82f-b733a1e31d2f",
+          "description": "",
+          "createdAt": "2026-07-22T11:02:41.000Z",
+          "updatedAt": "2026-07-22T11:02:41.000Z",
+          "uid": "0d9d7adb-4ae3-41c5-832d-c4f713914c4e"
         }
       ],
       "id": "9ecfad4b-4e05-4c3e-82a3-1f7ab02e8e01",
