@@ -3,7 +3,11 @@
     "_postman_id": "086948c4-9e81-4271-abb7-6d6995a67304",
     "name": "Unopim DAM API",
     "description": "The UnoPim DAM (Digital Asset Management) API provides a comprehensive RESTful interface for managing digital assets, directories, properties, tags, comments, and linked resources. This API enables developers to integrate UnoPim's DAM capabilities into their applications.\n\n**Official Documentation**: [Postman Documenter](https://documenter.getpostman.com/view/21990056/2sA3kXE17F)\n\n---\n\n## \ud83d\udd10 Authentication\n\nAll API endpoints require **Bearer Token** authentication.\n\n**Headers Required**:\n\n```\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n ```\n\n---\n\n## \ud83c\udf10 Base URL\n\n```\n{{url}}/api/v1/rest\n\n ```\n\n---\n\n## \ud83d\udcc2 API Resources\n\nThe API contains **23 endpoints** organized into **6 resource groups**:\n\n### 1\\. Assets (7 endpoints)\n\n- **GET** `/assets` - Get all assets (paginated)\n    \n- **GET** `/assets/{id}` - Get asset by ID\n    \n- **POST** `/assets` - Upload new asset\n    \n- **POST** `/assets/reupload` - Re-upload existing asset\n    \n- **PUT** `/assets/{id}` - Update asset metadata\n    \n- **DELETE** `/assets/{id}` - Delete asset\n    \n- **GET** `/assets/download/{id}` - Download asset file\n    \n\n### 2\\. Directories (5 endpoints)\n\n- **GET** `/directories` - Get all directories\n    \n- **GET** `/directories/{id}` - Get directory by ID\n    \n- **POST** `/directories` - Create new directory\n    \n- **PUT** `/directories/{id}` - Update directory\n    \n- **DELETE** `/directories/{id}` - Delete directory\n    \n\n### 3\\. Comments (3 endpoints)\n\n- **GET** `/comments/{id}` - Get comment by ID\n    \n- **POST** `/comments` - Create comment on asset\n    \n- **DELETE** `/comments/{id}` - Delete comment\n    \n\n### 4\\. Properties (4 endpoints)\n\n- **GET** `/properties/{id}` - Get property by ID\n    \n- **POST** `/properties/{asset_id}` - Create property for asset\n    \n- **PATCH** `/properties/{id}` - Update property\n    \n- **DELETE** `/properties/{id}` - Delete property\n    \n\n### 5\\. Tags (3 endpoints)\n\n- **GET** `/tags/{id}` - Get tag by ID\n    \n- **POST** `/tags` - Create and associate tag with asset\n    \n- **DELETE** `/tags` - Remove tag\n    \n\n### 6\\. Linked Resources (1 endpoint)\n\n- **GET** `/linked-resource/{id}` - Get linked resources",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-01-16T12:16:04.000Z",
+    "updatedAt": "2026-07-22T08:28:19.000Z",
+    "lastUpdatedBy": "4385199",
+    "uid": "4385199-086948c4-9e81-4271-abb7-6d6995a67304"
   },
   "item": [
     {
@@ -14,10 +18,14 @@
           "item": [
             {
               "name": "Get all Assets",
+              "id": "68163df7-fc23-4320-bb69-c26d34580634",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
               "request": {
+                "auth": {
+                  "type": "noauth"
+                },
                 "method": "GET",
                 "header": [
                   {
@@ -54,10 +62,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-68163df7-fc23-4320-bb69-c26d34580634"
             },
             {
               "name": "Get Asset by Id",
+              "id": "c2078692-5517-40f4-9174-7a90b4b87b7a",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -89,10 +101,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-c2078692-5517-40f4-9174-7a90b4b87b7a"
             },
             {
               "name": "Re-upload Asset",
+              "id": "6adf01c5-030c-4de6-bd40-c0be30d7f0ef",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -139,10 +155,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-6adf01c5-030c-4de6-bd40-c0be30d7f0ef"
             },
             {
               "name": "Update Asset",
+              "id": "0f4a6a98-1c87-40f2-8cbf-a2dd8170cc85",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -183,10 +203,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-0f4a6a98-1c87-40f2-8cbf-a2dd8170cc85"
             },
             {
               "name": "Upload the Asset",
+              "id": "9c8b5d0f-2616-4e25-8b46-9770d500aedb",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -232,10 +256,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-9c8b5d0f-2616-4e25-8b46-9770d500aedb"
             },
             {
               "name": "Delete the Asset",
+              "id": "e45f36fc-2075-4e38-98a5-dc35e5b6fdf7",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -267,10 +295,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-e45f36fc-2075-4e38-98a5-dc35e5b6fdf7"
             },
             {
               "name": "Download the Asset",
+              "id": "c4cc4151-fbf4-4164-87d1-dfbca473bd17",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -312,16 +344,24 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-c4cc4151-fbf4-4164-87d1-dfbca473bd17"
             }
           ],
-          "description": "In this section, we will see all the APIs which are related to DAM Assets\n\n###"
+          "id": "09e12423-176d-4eed-a87b-9cbf27d9663a",
+          "description": "In this section, we will see all the APIs which are related to DAM Assets\n\n###",
+          "createdAt": "2026-01-16T12:16:04.000Z",
+          "updatedAt": "2026-01-16T12:16:04.000Z",
+          "uid": "4385199-09e12423-176d-4eed-a87b-9cbf27d9663a"
         },
         {
           "name": "Directory",
           "item": [
             {
               "name": "Get all Directories",
+              "id": "9cc7d35d-7088-4788-9448-038756689ff2",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -352,10 +392,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-9cc7d35d-7088-4788-9448-038756689ff2"
             },
             {
               "name": "Get directory by Id",
+              "id": "4050fca4-51dc-483f-8e6c-b27c10bf2e69",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -387,10 +431,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-4050fca4-51dc-483f-8e6c-b27c10bf2e69"
             },
             {
               "name": "Create a directory",
+              "id": "34c03797-d261-4499-81da-b8e8b1a820eb",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -436,10 +484,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-34c03797-d261-4499-81da-b8e8b1a820eb"
             },
             {
               "name": "Update a directory",
+              "id": "79b5ae65-55a4-4179-8d19-315869aeacea",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -480,10 +532,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-79b5ae65-55a4-4179-8d19-315869aeacea"
             },
             {
               "name": "Delete a directory",
+              "id": "40e74f46-48cc-403a-86f0-ebf3e5a214d6",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -524,16 +580,24 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-40e74f46-48cc-403a-86f0-ebf3e5a214d6"
             }
           ],
-          "description": "In this section, we will see all the APIs which are related to DAM Directory\n\n###"
+          "id": "8cf8c724-a68e-47b0-81da-5febc645bab7",
+          "description": "In this section, we will see all the APIs which are related to DAM Directory\n\n###",
+          "createdAt": "2026-01-16T12:16:04.000Z",
+          "updatedAt": "2026-01-16T12:16:04.000Z",
+          "uid": "4385199-8cf8c724-a68e-47b0-81da-5febc645bab7"
         },
         {
           "name": "Comment",
           "item": [
             {
               "name": "Get Comment By Id",
+              "id": "3c88b655-2bde-41b2-a927-4f0c974a2cd6",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -565,10 +629,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-3c88b655-2bde-41b2-a927-4f0c974a2cd6"
             },
             {
               "name": "Delete Comment",
+              "id": "8c24cdc6-333a-4c7e-aa89-1fad216deacb",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -609,10 +677,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-8c24cdc6-333a-4c7e-aa89-1fad216deacb"
             },
             {
               "name": "Create a Comment",
+              "id": "d32d886f-0006-4001-a501-7491cad44792",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -652,16 +724,24 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-d32d886f-0006-4001-a501-7491cad44792"
             }
           ],
-          "description": "In this section, we will see all the APIs which are related to DAM Comment\n\n###"
+          "id": "6a12164e-569d-4b57-a9eb-75ad705b27ff",
+          "description": "In this section, we will see all the APIs which are related to DAM Comment\n\n###",
+          "createdAt": "2026-01-16T12:16:04.000Z",
+          "updatedAt": "2026-01-16T12:16:04.000Z",
+          "uid": "4385199-6a12164e-569d-4b57-a9eb-75ad705b27ff"
         },
         {
           "name": "Property",
           "item": [
             {
               "name": "Get Property By Id",
+              "id": "1a21345b-ce5b-4290-90ef-e19d53b560ec",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -693,10 +773,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-1a21345b-ce5b-4290-90ef-e19d53b560ec"
             },
             {
               "name": "Update Property",
+              "id": "901451a9-2715-4cf9-873f-89f4a3f4af1a",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -737,10 +821,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-901451a9-2715-4cf9-873f-89f4a3f4af1a"
             },
             {
               "name": "Delete the Property",
+              "id": "40aae4ec-b6ac-4197-8eaa-45e7e62a1314",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -781,10 +869,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-40aae4ec-b6ac-4197-8eaa-45e7e62a1314"
             },
             {
               "name": "Create a Property",
+              "id": "a3fe23b2-8de9-46ce-98ec-3e19ab930b7c",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -825,16 +917,24 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-a3fe23b2-8de9-46ce-98ec-3e19ab930b7c"
             }
           ],
-          "description": "In this section, we will see all the APIs which are related to DAM Property\n\n###"
+          "id": "05743d9a-009a-4225-bd3d-e1103cf89c54",
+          "description": "In this section, we will see all the APIs which are related to DAM Property\n\n###",
+          "createdAt": "2026-01-16T12:16:04.000Z",
+          "updatedAt": "2026-01-16T12:16:04.000Z",
+          "uid": "4385199-05743d9a-009a-4225-bd3d-e1103cf89c54"
         },
         {
           "name": "Tag",
           "item": [
             {
               "name": "Get Tag By Id",
+              "id": "bbecf0a3-5e82-43c3-b7e1-2b5cafacd8e2",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -866,10 +966,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-bbecf0a3-5e82-43c3-b7e1-2b5cafacd8e2"
             },
             {
               "name": "Create a Tag",
+              "id": "3b0f8e2e-f77c-4703-ba64-6d3fb264d2ee",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -909,10 +1013,14 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-3b0f8e2e-f77c-4703-ba64-6d3fb264d2ee"
             },
             {
               "name": "Remove a Tag",
+              "id": "c47ff129-e3da-4fb2-9eda-fd5285e9a8b8",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -959,16 +1067,24 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-c47ff129-e3da-4fb2-9eda-fd5285e9a8b8"
             }
           ],
-          "description": "In this section, we will see all the APIs which are related to DAM Tag\n\n###"
+          "id": "cfee14cc-4e58-4c1f-8739-7410a3bca506",
+          "description": "In this section, we will see all the APIs which are related to DAM Tag\n\n###",
+          "createdAt": "2026-01-16T12:16:04.000Z",
+          "updatedAt": "2026-01-16T12:16:04.000Z",
+          "uid": "4385199-cfee14cc-4e58-4c1f-8739-7410a3bca506"
         },
         {
           "name": "Linked Resources",
           "item": [
             {
               "name": "Get the Linked Resources",
+              "id": "669ae18b-b0cb-4d2b-82a5-fa669235d0d0",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -1000,13 +1116,24 @@
                   ]
                 }
               },
-              "response": []
+              "response": [],
+              "createdAt": "2026-01-16T12:16:04.000Z",
+              "updatedAt": "2026-01-16T12:16:04.000Z",
+              "uid": "4385199-669ae18b-b0cb-4d2b-82a5-fa669235d0d0"
             }
           ],
-          "description": "In this section, we will see all the APIs which are related to DAM Linked Resources\n\n###"
+          "id": "5aa97080-03fa-4845-ad02-daf663bf076f",
+          "description": "In this section, we will see all the APIs which are related to DAM Linked Resources\n\n###",
+          "createdAt": "2026-01-16T12:16:04.000Z",
+          "updatedAt": "2026-01-16T12:16:04.000Z",
+          "uid": "4385199-5aa97080-03fa-4845-ad02-daf663bf076f"
         }
       ],
-      "description": "In this section, we will see all the APIs which are related to DAM.\n\n###"
+      "id": "9ecfad4b-4e05-4c3e-82a3-1f7ab02e8e01",
+      "description": "In this section, we will see all the APIs which are related to DAM.\n\n###",
+      "createdAt": "2026-01-16T12:16:04.000Z",
+      "updatedAt": "2026-01-16T12:16:04.000Z",
+      "uid": "4385199-9ecfad4b-4e05-4c3e-82a3-1f7ab02e8e01"
     }
   ]
 }
