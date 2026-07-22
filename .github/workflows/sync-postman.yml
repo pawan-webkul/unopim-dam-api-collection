@@ -10,49 +10,80 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      POSTMAN_COLLECTION_ID: ${{ secrets.POSTMAN_COLLECTION_ID }}
+      POSTMAN_ENVIRONMENT_ID: ${{ secrets.POSTMAN_ENVIRONMENT_ID }}
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Verify secrets are configured
+        run: |
+          : "${POSTMAN_API_KEY:?POSTMAN_API_KEY secret is not set}"
+          : "${POSTMAN_COLLECTION_ID:?POSTMAN_COLLECTION_ID secret is not set}"
+
       - name: Fetch latest collection from Postman API
         run: |
-          RESPONSE=$(curl -s "https://api.getpostman.com/collections/${{ secrets.POSTMAN_COLLECTION_ID }}" \
-            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}")
-          echo "$RESPONSE" | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          if 'error' in data:
-              print('ERROR from Postman API:', data['error'])
+          STATUS=$(curl -s -o response.json -w '%{http_code}' \
+            "https://api.getpostman.com/collections/${POSTMAN_COLLECTION_ID}" \
+            -H "X-Api-Key: ${POSTMAN_API_KEY}")
+
+          STATUS="$STATUS" python3 -c "
+          import json, os, sys
+          status = int(os.environ['STATUS'])
+          try:
+              data = json.load(open('response.json'))
+          except json.JSONDecodeError:
+              print('HTTP', status, '- non-JSON response:', open('response.json').read()[:500])
               sys.exit(1)
-          collection = data.get('collection', data)
+          if status >= 300 or 'error' in data:
+              print('HTTP', status, '- ERROR from Postman API:', json.dumps(data.get('error', data))[:500])
+              sys.exit(1)
+          collection = data.get('collection')
+          if not collection or 'item' not in collection:
+              print('HTTP', status, '- unexpected response shape:', json.dumps(data)[:500])
+              sys.exit(1)
           with open('collections/Unopim-DAM-API.postman_collection.json', 'w') as f:
               json.dump(collection, f, indent=2)
-          print('Collection synced successfully')
+          print('Collection synced successfully:', collection['info']['name'])
           "
 
       - name: Fetch latest environment from Postman API
+        if: env.POSTMAN_ENVIRONMENT_ID != ''
         run: |
-          RESPONSE=$(curl -s "https://api.getpostman.com/environments/${{ secrets.POSTMAN_ENVIRONMENT_ID }}" \
-            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}")
-          echo "$RESPONSE" | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          if 'error' in data:
-              print('ERROR from Postman API:', data['error'])
+          STATUS=$(curl -s -o response.json -w '%{http_code}' \
+            "https://api.getpostman.com/environments/${POSTMAN_ENVIRONMENT_ID}" \
+            -H "X-Api-Key: ${POSTMAN_API_KEY}")
+
+          STATUS="$STATUS" python3 -c "
+          import json, os, sys
+          status = int(os.environ['STATUS'])
+          try:
+              data = json.load(open('response.json'))
+          except json.JSONDecodeError:
+              print('HTTP', status, '- non-JSON response:', open('response.json').read()[:500])
               sys.exit(1)
-          environment = data.get('environment', data)
+          if status >= 300 or 'error' in data:
+              print('HTTP', status, '- ERROR from Postman API:', json.dumps(data.get('error', data))[:500])
+              sys.exit(1)
+          environment = data.get('environment')
+          if not environment or 'values' not in environment:
+              print('HTTP', status, '- unexpected response shape:', json.dumps(data)[:500])
+              sys.exit(1)
           # Sanitize secret values before committing
-          for var in environment.get('values', []):
+          for var in environment['values']:
               if var.get('type') == 'secret':
                   var['value'] = ''
           with open('environments/UnoPim-DAM-Local.postman_environment.json', 'w') as f:
               json.dump(environment, f, indent=2)
-          print('Environment synced successfully')
+          print('Environment synced successfully:', environment['name'])
           "
 
       - name: Commit if changed
         run: |
+          rm -f response.json
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add collections/ environments/

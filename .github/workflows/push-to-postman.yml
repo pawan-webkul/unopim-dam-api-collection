@@ -10,31 +10,48 @@ on:
 jobs:
   push:
     runs-on: ubuntu-latest
+    env:
+      POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      POSTMAN_COLLECTION_ID: ${{ secrets.POSTMAN_COLLECTION_ID }}
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verify secrets are configured
+        run: |
+          : "${POSTMAN_API_KEY:?POSTMAN_API_KEY secret is not set}"
+          : "${POSTMAN_COLLECTION_ID:?POSTMAN_COLLECTION_ID secret is not set}"
+
       - name: Push collection to Postman
         run: |
-          COLLECTION=$(cat collections/Unopim-DAM-API.postman_collection.json)
-
           # Wrap in { "collection": ... } as required by Postman API
-          PAYLOAD=$(echo "$COLLECTION" | python3 -c "
-          import json, sys
-          collection = json.load(sys.stdin)
-          print(json.dumps({'collection': collection}))
-          ")
+          python3 -c "
+          import json
+          with open('collections/Unopim-DAM-API.postman_collection.json') as f:
+              collection = json.load(f)
+          with open('payload.json', 'w') as f:
+              json.dump({'collection': collection}, f)
+          "
 
-          RESPONSE=$(curl -s -X PUT \
-            "https://api.getpostman.com/collections/${{ secrets.POSTMAN_COLLECTION_ID }}" \
-            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
+          STATUS=$(curl -s -o response.json -w '%{http_code}' -X PUT \
+            "https://api.getpostman.com/collections/${POSTMAN_COLLECTION_ID}" \
+            -H "X-Api-Key: ${POSTMAN_API_KEY}" \
             -H "Content-Type: application/json" \
-            -d "$PAYLOAD")
+            --data-binary @payload.json)
 
-          echo "$RESPONSE" | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          if 'error' in data:
-              print('ERROR:', data['error'])
+          STATUS="$STATUS" python3 -c "
+          import json, os, sys
+          status = int(os.environ['STATUS'])
+          try:
+              data = json.load(open('response.json'))
+          except json.JSONDecodeError:
+              print('HTTP', status, '- non-JSON response:', open('response.json').read()[:500])
               sys.exit(1)
-          print('Collection pushed to Postman successfully:', data.get('collection', {}).get('name', 'OK'))
+          if status >= 300 or 'error' in data:
+              print('HTTP', status, '- ERROR:', json.dumps(data.get('error', data))[:500])
+              sys.exit(1)
+          name = data.get('collection', {}).get('name')
+          if not name:
+              print('HTTP', status, '- unexpected response shape:', json.dumps(data)[:500])
+              sys.exit(1)
+          print('Collection pushed to Postman successfully:', name)
           "
