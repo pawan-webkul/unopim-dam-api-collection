@@ -1,0 +1,1012 @@
+{
+  "info": {
+    "_postman_id": "086948c4-9e81-4271-abb7-6d6995a67304",
+    "name": "Unopim DAM API",
+    "description": "The UnoPim DAM (Digital Asset Management) API provides a comprehensive RESTful interface for managing digital assets, directories, properties, tags, comments, and linked resources. This API enables developers to integrate UnoPim's DAM capabilities into their applications.\n\n**Official Documentation**: [Postman Documenter](https://documenter.getpostman.com/view/21990056/2sA3kXE17F)\n\n---\n\n## \ud83d\udd10 Authentication\n\nAll API endpoints require **Bearer Token** authentication.\n\n**Headers Required**:\n\n```\nAuthorization: Bearer {{token}}\nAccept: application/json\n\n ```\n\n---\n\n## \ud83c\udf10 Base URL\n\n```\n{{url}}/api/v1/rest\n\n ```\n\n---\n\n## \ud83d\udcc2 API Resources\n\nThe API contains **23 endpoints** organized into **6 resource groups**:\n\n### 1\\. Assets (7 endpoints)\n\n- **GET** `/assets` - Get all assets (paginated)\n    \n- **GET** `/assets/{id}` - Get asset by ID\n    \n- **POST** `/assets` - Upload new asset\n    \n- **POST** `/assets/reupload` - Re-upload existing asset\n    \n- **PUT** `/assets/{id}` - Update asset metadata\n    \n- **DELETE** `/assets/{id}` - Delete asset\n    \n- **GET** `/assets/download/{id}` - Download asset file\n    \n\n### 2\\. Directories (5 endpoints)\n\n- **GET** `/directories` - Get all directories\n    \n- **GET** `/directories/{id}` - Get directory by ID\n    \n- **POST** `/directories` - Create new directory\n    \n- **PUT** `/directories/{id}` - Update directory\n    \n- **DELETE** `/directories/{id}` - Delete directory\n    \n\n### 3\\. Comments (3 endpoints)\n\n- **GET** `/comments/{id}` - Get comment by ID\n    \n- **POST** `/comments` - Create comment on asset\n    \n- **DELETE** `/comments/{id}` - Delete comment\n    \n\n### 4\\. Properties (4 endpoints)\n\n- **GET** `/properties/{id}` - Get property by ID\n    \n- **POST** `/properties/{asset_id}` - Create property for asset\n    \n- **PATCH** `/properties/{id}` - Update property\n    \n- **DELETE** `/properties/{id}` - Delete property\n    \n\n### 5\\. Tags (3 endpoints)\n\n- **GET** `/tags/{id}` - Get tag by ID\n    \n- **POST** `/tags` - Create and associate tag with asset\n    \n- **DELETE** `/tags` - Remove tag\n    \n\n### 6\\. Linked Resources (1 endpoint)\n\n- **GET** `/linked-resource/{id}` - Get linked resources",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "DAM",
+      "item": [
+        {
+          "name": "Asset",
+          "item": [
+            {
+              "name": "Get all Assets",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets?limit=100&page=1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Asset by Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/390",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "390"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Re-upload Asset",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": "/home/users/prince.sahni/Downloads/image (2).png"
+                    },
+                    {
+                      "key": "asset_id",
+                      "value": "390",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/reupload",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "reupload"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Asset",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"file_name\" : \"Update File Name\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/211",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "211"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Upload the Asset",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "files[]",
+                      "type": "file",
+                      "src": "/home/users/prince.sahni/Downloads/full aws url (5).png"
+                    },
+                    {
+                      "key": "directory_id",
+                      "value": "1",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete the Asset",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/384",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "384"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Download the Asset",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/download/210",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "download",
+                    "210"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "In this section, we will see all the APIs which are related to DAM Assets\n\n###"
+        },
+        {
+          "name": "Directory",
+          "item": [
+            {
+              "name": "Get all Directories",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/directories",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "directories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get directory by Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/directories/1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "directories",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a directory",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Testing_Directory",
+                      "type": "text"
+                    },
+                    {
+                      "key": "parent_id",
+                      "value": "1",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/directories",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "directories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update a directory",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\" : \"Testing Directory\",\n    \"parent_id\" : 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/directories/2",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "directories",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete a directory",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\" : \"Testing Directory\",\n    \"parent_id\" : 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/directories/4",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "directories",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "In this section, we will see all the APIs which are related to DAM Directory\n\n###"
+        },
+        {
+          "name": "Comment",
+          "item": [
+            {
+              "name": "Get Comment By Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/comments/3",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "comments",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Comment",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/comments/2",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "comments",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a Comment",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"comments\" : \"New more varients of this proudct\",\n    \"dam_asset_id\":4\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/comments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "comments"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "In this section, we will see all the APIs which are related to DAM Comment\n\n###"
+        },
+        {
+          "name": "Property",
+          "item": [
+            {
+              "name": "Get Property By Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/properties/3",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "properties",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Property",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\":\"Text\",\n    \"value\"  :\"This is the New Property\",\n    \"language\":\"58\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/properties/1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "properties",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete the Property",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"comments\" : \"Hello Who are you ??\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/properties/2",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "properties",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a Property",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\"        : \"Description\",\n    \"type\"        : \"Text\",         \n    \"value\"       : \"This image showcases the new winter collection of jackets.\",\n    \"language\"    : \"en_US\"    \n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/properties/7",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "properties",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "In this section, we will see all the APIs which are related to DAM Property\n\n###"
+        },
+        {
+          "name": "Tag",
+          "item": [
+            {
+              "name": "Get Tag By Id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags/1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a Tag",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"tag\" : \"Test\",\n    \"asset_id\" : 9\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Remove a Tag",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"tag\" : \"Test\",\n    \"asset_id\" : 9\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": "",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "In this section, we will see all the APIs which are related to DAM Tag\n\n###"
+        },
+        {
+          "name": "Linked Resources",
+          "item": [
+            {
+              "name": "Get the Linked Resources",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/linked-resource/9",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "linked-resource",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "In this section, we will see all the APIs which are related to DAM Linked Resources\n\n###"
+        }
+      ],
+      "description": "In this section, we will see all the APIs which are related to DAM.\n\n###"
+    }
+  ]
+}

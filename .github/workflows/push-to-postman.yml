@@ -1,0 +1,40 @@
+name: Push Collection to Postman
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'collections/**.json'   # only triggers when collection file changes
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push collection to Postman
+        run: |
+          COLLECTION=$(cat collections/Unopim-DAM-API.postman_collection.json)
+
+          # Wrap in { "collection": ... } as required by Postman API
+          PAYLOAD=$(echo "$COLLECTION" | python3 -c "
+          import json, sys
+          collection = json.load(sys.stdin)
+          print(json.dumps({'collection': collection}))
+          ")
+
+          RESPONSE=$(curl -s -X PUT \
+            "https://api.getpostman.com/collections/${{ secrets.POSTMAN_COLLECTION_ID }}" \
+            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          echo "$RESPONSE" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          if 'error' in data:
+              print('ERROR:', data['error'])
+              sys.exit(1)
+          print('Collection pushed to Postman successfully:', data.get('collection', {}).get('name', 'OK'))
+          "
