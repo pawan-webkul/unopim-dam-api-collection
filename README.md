@@ -10,19 +10,19 @@ Companion to the [Official UnoPim API collection](https://github.com/unopim/unop
 
 Base URL: `{{url}}/api/v1/rest`
 
-23 requests across 6 resource groups:
+35 requests across 7 resource groups:
 
 | Resource | Requests |
 |---|---|
-| Asset | List, Get by ID, Upload, Re-upload, Update, Delete, Download |
+| Asset | List, Get by ID, Upload, Re-upload, Update, Get Embedded Metadata, Download, Delete |
 | Directory | List, Get by ID, Create, Update, Delete |
 | Comment | Get by ID, Create, Delete |
 | Property | Get by ID, Create, Update, Delete |
-| Tag | Get by ID, Create, Remove |
-| Linked Resources | Get by asset ID |
+| Tag | List, Get by ID, Create, Remove, Bulk Assign, Delete |
+| Share | Get by ID, List, Create (Asset), Create (Directory), Update, Revoke, Reauthorize, Delete |
+| Linked Resources | Get by ID |
 
-Not yet covered (endpoints exist in the DAM package): `PUT /assets/edit/{id}`,
-`GET /assets/signUrlDownload/{id}` (signed), `PUT /comments/{id}`.
+Not yet covered (endpoints exist in the DAM package): `PUT /comments/{id}`.
 
 ## Getting Started
 
