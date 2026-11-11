@@ -389,6 +389,88 @@
               "createdAt": "2026-07-22T11:02:41.000Z",
               "updatedAt": "2026-07-22T11:02:41.000Z",
               "uid": "c7f514e5-7106-4d04-970d-bcecb572afaa"
+            },
+            {
+              "name": "Get Asset Edit Details",
+              "id": "ba317459-8bd6-441a-a66a-f51c9792d170",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/edit/390",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "edit",
+                    "390"
+                  ]
+                },
+                "description": "Return everything the asset edit screen needs in one call: the asset with its preview URL (`previewPath`), embedded metadata for images (`embeddedMetaInfo`), its comments (newest first), and the full tag vocabulary (`tags`).\n\nRead-only; nothing is changed. Use `PUT /assets/{id}` to update an asset."
+              },
+              "response": [],
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "5e28137f-45d0-4e42-a7a8-b37961fe7a44"
+            },
+            {
+              "name": "Get Asset Tags",
+              "id": "bb7d4985-00f9-47cb-be41-cd817a351602",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/assets/18/tags",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "assets",
+                    "18",
+                    "tags"
+                  ]
+                },
+                "description": "Return the tags of one asset, sorted by name, as `data: [{id, name}]`.\n\n`ai_tagging_pending` is `true` while an AI tagging job is still queued for the asset. After calling `POST /tags/ai`, poll this endpoint until it turns `false` to read the generated tags.\n\nRequires the `api.dam.assets.tags` API key scope."
+              },
+              "response": [],
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "5abfd488-5d52-4fa3-83db-3eb887dc00aa"
             }
           ],
           "id": "09e12423-176d-4eed-a87b-9cbf27d9663a",
@@ -769,6 +851,55 @@
               "createdAt": "2026-01-16T12:16:04.000Z",
               "updatedAt": "2026-01-16T12:16:04.000Z",
               "uid": "4385199-d32d886f-0006-4001-a501-7491cad44792"
+            },
+            {
+              "name": "Update Comment",
+              "id": "fb55c951-038f-4c27-9989-d0bf36032535",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"comments\": \"Updated comment text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/comments/3",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "comments",
+                    "3"
+                  ]
+                },
+                "description": "Update the text of a comment. Only `comments` is changed. You can only update your own comments (403 otherwise), and the comment's asset must be in a directory you can access."
+              },
+              "response": [],
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "16605bef-f765-4e94-9868-4d27e87790de"
             }
           ],
           "id": "6a12164e-569d-4b57-a9eb-75ad705b27ff",
@@ -1251,6 +1382,55 @@
               "createdAt": "2026-07-22T11:02:41.000Z",
               "updatedAt": "2026-07-22T11:02:41.000Z",
               "uid": "0d282de5-9b09-4345-8c5f-8a132a1f814f"
+            },
+            {
+              "name": "Generate AI Tags (Existing Assets)",
+              "id": "cbbd6619-e35d-45d2-b03a-ca89d467a0cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"asset_ids\": [\n        1,\n        2,\n        3\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/api/v1/rest/tags/ai",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rest",
+                    "tags",
+                    "ai"
+                  ]
+                },
+                "description": "Queue AI tagging for existing image assets. Tags are generated in the background by the AI platform configured under DAM > Configuration and are added alongside each asset's current tags (never replacing them).\n\nRequires the `api.dam.tags.ai-tag` API key scope (granted automatically to keys with full access). Max 1000 asset_ids.\n\n- Non-image assets and assets in directories the API user cannot access are skipped and counted in `skipped`.\n- Several images are tracked as one \"DAM AI tagging\" job in the job tracker.\n- The response only confirms the assets were queued. Poll `GET /assets/{id}/tags` until `ai_tagging_pending` is `false` to read the generated tags.\n\n**422** is returned when AI tagging is disabled or no active image-capable AI platform is configured, when none of the given assets can be queued, or when `asset_ids` fails validation."
+              },
+              "response": [],
+              "createdAt": "2026-07-22T11:02:41.000Z",
+              "updatedAt": "2026-07-22T11:02:41.000Z",
+              "uid": "6b1fb1ea-0139-478c-9e33-5b00e3163495"
             }
           ],
           "id": "cfee14cc-4e58-4c1f-8739-7410a3bca506",
